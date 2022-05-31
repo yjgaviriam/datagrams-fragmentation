@@ -1,0 +1,31 @@
+<span class="text-primary fw-bold">{{ title }}</span>
+<form class="form border border-primary rounded p-4 m-3 mx-auto">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      &nbsp;{{ node.name }}
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      &nbsp;{{ node.name }}
+    </mat-tree-node>
+  </mat-tree>
+  <mat-form-field appearance="fill" class="form-full-width mt-3">
+    <mat-label>Resultado</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+  <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="format"
+    [ngModelOptions]="{standalone: true}">
+    <mat-radio-button class="example-radio-button" value="Binario">
+      Binario
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button" value="Hexadecimal">
+      Hexadecimal
+    </mat-radio-button>
+  </mat-radio-group>
+</form>
