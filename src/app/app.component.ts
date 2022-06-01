@@ -41,26 +41,6 @@ export class AppComponent {
     });
     this.fragments = [];
     this.protocols = ['ICMP', 'TCP', 'UDP'];
-
-    this.prueba();
-
-  }
-
-  public prueba(): void {
-    const mtu = 1500;
-    const datagramLength = 40;
-    const protocol = 'TCP';
-    const addresses = {
-      destination: '192.168.1.13',
-      source: '54.148.90.190'
-    };
-
-    const identificationNumber = 54234;
-    const timeToLive = 213;
-    this.fragments = this.fragmentService.buildDatagramHeaders(mtu, datagramLength, protocol, addresses, identificationNumber, timeToLive);
-
-    console.log(this.fragments);
-
   }
 
   /**
