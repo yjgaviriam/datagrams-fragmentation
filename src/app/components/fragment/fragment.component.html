@@ -18,7 +18,7 @@
   <mat-form-field appearance="fill" class="form-full-width mt-3">
     <mat-label>Resultado</mat-label>
     <textarea disabled matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-      cdkAutosizeMaxRows="5">{{ fragment.binaryResult | systemFormat : format | separateFormat : format }}</textarea>
+      cdkAutosizeMaxRows="5">{{ fragment?.binaryResult | systemFormat : format | separateFormat : format }}</textarea>
   </mat-form-field>
   <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="format"
     [ngModelOptions]="{standalone: true}">
