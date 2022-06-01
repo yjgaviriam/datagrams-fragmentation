@@ -17,6 +17,9 @@ export class AppComponent {
 
   public protocols: string[];
 
+  /**
+   * Constructor de la clase
+   */
   constructor(private fb: FormBuilder, private fragmentService: FragmentService, private utilitiesService: UtilitiesService) {
     this.form = this.fb.group({
       mtu: ['', Validators.required],
@@ -31,6 +34,9 @@ export class AppComponent {
     this.protocols = ['ICMP', 'TCP', 'UDP'];
   }
 
+  /**
+   * Genera data aleatoria para el formulario
+   */
   public generateData(): void {
     const mtu = this.utilitiesService.generateRandomNumber();
     const datagramLength = this.utilitiesService.generateRandomNumber();
@@ -42,6 +48,9 @@ export class AppComponent {
     this.form.setValue({ mtu, datagramLength, protocol, addresses });
   }
 
+  /**
+   * Llama a la ejecución del servicio
+   */
   public onSubmit(): void {
     const { mtu, datagramLength, protocol, addresses } = this.form.value;
     const identificationNumber = this.utilitiesService.generateRandomNumber(0, 65536);
