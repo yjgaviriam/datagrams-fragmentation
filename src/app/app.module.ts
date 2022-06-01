@@ -13,13 +13,15 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SystemFormatPipe } from './pipes/system-format.pipe';
 import { FragmentComponent } from './components/fragment/fragment.component';
+import { SeparateFormatPipe } from './pipes/separate-format.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SystemFormatPipe,
-    FragmentComponent
+    FragmentComponent,
+    SeparateFormatPipe
   ],
   imports: [
     BrowserModule,

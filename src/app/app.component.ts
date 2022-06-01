@@ -22,7 +22,7 @@ export class AppComponent {
       mtu: ['', Validators.required],
       datagramLength: ['', Validators.required],
       protocol: ['', Validators.required],
-      address: this.fb.group({
+      addresses: this.fb.group({
         destination: ['', Validators.required],
         source: ['', Validators.required]
       }),
@@ -35,17 +35,17 @@ export class AppComponent {
   }
 
   public prueba(): void {
-    const mtu = 576;
-    const datagramLength = 1440;
-    const protocol = this.protocols[this.utilitiesService.generateRandomNumber(0, this.protocols.length)];
-    const address = {
-      destination: `192.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}`,
-      source: `192.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}`
+    const mtu = 1500;
+    const datagramLength = 40;
+    const protocol = 'TCP';
+    const addresses = {
+      destination: '192.168.1.13',
+      source: '54.148.90.190'
     };
 
-    const identificationNumber = this.utilitiesService.generateRandomNumber(0, 65536);
-    const timeToLive = this.utilitiesService.generateRandomNumber(0, 256);
-    this.fragments = this.fragmentService.buildDatagramHeaders(mtu, datagramLength, protocol, address, identificationNumber, timeToLive);
+    const identificationNumber = 54234;
+    const timeToLive = 213;
+    this.fragments = this.fragmentService.buildDatagramHeaders(mtu, datagramLength, protocol, addresses, identificationNumber, timeToLive);
 
     console.log(this.fragments);
 
@@ -55,17 +55,19 @@ export class AppComponent {
     const mtu = this.utilitiesService.generateRandomNumber();
     const datagramLength = this.utilitiesService.generateRandomNumber();
     const protocol = this.protocols[this.utilitiesService.generateRandomNumber(0, this.protocols.length)];
-    const address = {
+    const addresses = {
       destination: `192.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}`,
       source: `192.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}.${this.utilitiesService.generateRandomNumber(0, 255)}`
     };
-    this.form.setValue({ mtu, datagramLength, protocol, address });
+    this.form.setValue({ mtu, datagramLength, protocol, addresses });
   }
 
   public onSubmit(): void {
-    const { mtu, datagramLength, protocol, address } = this.form.value;
+    const { mtu, datagramLength, protocol, addresses } = this.form.value;
     const identificationNumber = this.utilitiesService.generateRandomNumber(0, 65536);
     const timeToLive = this.utilitiesService.generateRandomNumber(0, 256);
-    this.fragments = this.fragmentService.buildDatagramHeaders(mtu, datagramLength, protocol, address, identificationNumber, timeToLive);
+    this.fragments = this.fragmentService.buildDatagramHeaders(mtu, datagramLength, protocol, addresses, identificationNumber, timeToLive);
+
+
   }
 }
