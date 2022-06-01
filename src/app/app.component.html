@@ -6,6 +6,7 @@
     <div class="card-body">
 
       <div class="row">
+        <!-- Formulario -->
         <div [ngClass]="{'col-md-5 ': fragments.length > 0}" class="p-md-5 border border-light rounded border-2">
           <form class="form mx-auto" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-form-field class="form-full-width" appearance="fill">
@@ -45,13 +46,17 @@
             </div>
           </form>
         </div>
+        <!-- ./Formulario -->
 
+        <!-- Fragmentos -->
         <div *ngIf="fragments.length > 0" class="col-md-7 border border-light rounded border-2 overflow-auto">
           <div class="row m-4">
             <app-fragment *ngFor="let fragment of fragments; let i = index; let l = count" [title]="'Fragmento #' + (i+1) + ' de ' + l" [fragment]="fragment">
             </app-fragment>
           </div>
         </div>
+        <!-- ./Fragmentos -->
+
       </div>
     </div>
   </div>

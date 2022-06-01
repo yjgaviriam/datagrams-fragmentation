@@ -1,3 +1,6 @@
+/**
+ * Constantes utilizadas en el proyecto
+ */
 export class AppConstants {
   public static readonly INTERNET_PROTOCOL_VERSION_BINARY_VALUE = '0100';
   public static readonly HEADER_LENGTH_BINARY_VALUE = '0101';

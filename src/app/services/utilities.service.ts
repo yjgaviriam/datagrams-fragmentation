@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../app.constants';
 
+/**
+ * Controla funcionalidades reutilizables y genericas
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class UtilitiesService {
 
+  /**
+   * Constructor de la clase
+   */
   constructor() { }
 
   /**
@@ -44,6 +50,13 @@ export class UtilitiesService {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  /**
+   * Calcula la suma de comprobacion del fragmento
+   *
+   * @param values Los binarios que componen el calculo
+   *
+   * @returns El numero decimal calculado
+   */
   public sumHexadecimal(values: string[]): number {
 
     let result = 0;
@@ -58,6 +71,14 @@ export class UtilitiesService {
     return this.sumHexadecimalCarry(parseInt(valueHexadecimal.substring(positionToStart), 16), parseInt(valueHexadecimal.substring(0, positionToStart), 16));
   }
 
+  /**
+   * Realiza el acarreo de la suma de comprobacion de forma recursiva
+   *
+   * @param value Valor final de la suma en decimal sin el digito de acarreo
+   * @param carry Valor de acarreo
+   *
+   * @returns El valor final que no supere el maximo decimal equivalente a FFFF en hexadecimal
+   */
   private sumHexadecimalCarry(value: number, carry: number): number {
 
     const sum = value + carry;
