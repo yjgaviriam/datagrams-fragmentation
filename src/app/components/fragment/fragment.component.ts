@@ -80,8 +80,20 @@ export class FragmentComponent implements OnInit {
             value: '',
             children: [
               {
-                key: 'Flags',
-                value: '',
+                key: `${this.fragment.fragmentation.substring(0, 1)}... .... = `,
+                value: 'Reserved bit: Not set',
+              },
+              {
+                key: `.${this.fragment.fragmentation.substring(1, 2)}.. .... = `,
+                value: `Don't fragment: ${this.fragment.fragmentation.substring(1, 2) === '0' ? 'Not set' : 'Set' }`,
+              },
+              {
+                key: `..${this.fragment.fragmentation.substring(2)}. .... = `,
+                value: `More fragments: ${this.fragment.fragmentation.substring(2) === '0' ? 'Not set' : 'Set' }`,
+              },
+              {
+                key: `${(`...${this.fragment.displacement}`.match(/.{4}/g) || []).join(' ')} = `,
+                value: `Fragment Offset: ${parseInt(this.fragment.displacement, 2)}`,
               }
             ]
           },

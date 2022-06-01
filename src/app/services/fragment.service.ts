@@ -43,7 +43,7 @@ export class FragmentService {
       const fragmentLength = (datagramLength > mtu) ? (positionCurrentFragment === quantityFragments ? (datagramLength - totalBytesSent) : mtu) : datagramLength;
       const fragmentTotalLength = (positionCurrentFragment === quantityFragments) ? fragmentLength : this.calculateFragmentLengthSent(fragmentLength - AppConstants.HEADER_LENGTH_VALUE) + AppConstants.HEADER_LENGTH_VALUE;
       const binaryResult = this.buildDatagramHeader(fragmentTotalLength, identificationNumber, quantityFragments, positionCurrentFragment, totalBytesSent, timeToLive, protocol, addresses);
-      result.push({ addresses, binaryResult, fragmentTotalLength, identificationNumber, protocol, timeToLive });
+      result.push({ addresses, binaryResult, displacement: this.buildDisplacement(totalBytesSent, positionCurrentFragment), fragmentation: this.buildFragmentationInformation(quantityFragments, positionCurrentFragment), fragmentTotalLength, identificationNumber, protocol, timeToLive });
       totalBytesSent += fragmentTotalLength - AppConstants.HEADER_LENGTH_VALUE;
       positionCurrentFragment++;
     }
@@ -53,7 +53,7 @@ export class FragmentService {
 
   private buildChecksum(binaryData: string): string {
     return this.utilitiesService.fillString(this.utilitiesService.convertToBinary(
-      AppConstants.MAX_VALUE_HEXADECIMAL - this.utilitiesService.sumHexadecimal(binaryData.replace(/\s/g, '').match(/.{16}/g) || [])), '0', 16
+      AppConstants.MAX_VALUE_HEXADECIMAL - this.utilitiesService.sumHexadecimal(binaryData.match(/.{16}/g) || [])), '0', 16
     );
   }
 
