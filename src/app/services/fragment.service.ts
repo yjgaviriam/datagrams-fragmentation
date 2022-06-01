@@ -3,6 +3,7 @@ import { AppConstants } from '../app.constants';
 import { UtilitiesService } from './utilities.service';
 import { Protocols } from '../models/protocols.enum';
 import { IAddresses } from '../models/addresses.interface';
+import { IFragment } from '../models/fragment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,8 @@ export class FragmentService {
       const fragmentLength = (datagramLength > mtu) ? (positionCurrentFragment === quantityFragments ? (datagramLength - totalBytesSent) : mtu) : datagramLength;
       const fragmentTotalLength = (positionCurrentFragment === quantityFragments) ? fragmentLength : this.calculateFragmentLengthSent(fragmentLength - AppConstants.HEADER_LENGTH_VALUE) + AppConstants.HEADER_LENGTH_VALUE;
       const binaryResult = this.buildDatagramHeader(fragmentTotalLength, identificationNumber, quantityFragments, positionCurrentFragment, totalBytesSent, timeToLive, protocol, addresses);
-      result.push({ addresses, binaryResult, displacement: this.buildDisplacement(totalBytesSent, positionCurrentFragment), fragmentation: this.buildFragmentationInformation(quantityFragments, positionCurrentFragment), fragmentTotalLength, identificationNumber, protocol, timeToLive });
+      const fragment: IFragment = { addresses, binaryResult, displacement: this.buildDisplacement(totalBytesSent, positionCurrentFragment), fragmentation: this.buildFragmentationInformation(quantityFragments, positionCurrentFragment), fragmentTotalLength, identificationNumber, protocol, timeToLive };
+      result.push(fragment);
       totalBytesSent += fragmentTotalLength - AppConstants.HEADER_LENGTH_VALUE;
       positionCurrentFragment++;
     }

@@ -2,16 +2,31 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { UtilitiesService } from '../services/utilities.service';
 
 @Pipe({
-  name: 'systemFormat'
+  name: 'systemsystem'
 })
-export class SystemFormatPipe implements PipeTransform {
+export class SystemsystemPipe implements PipeTransform {
 
   constructor(private utilitiesService: UtilitiesService) { }
 
-  transform(binaries: string, format: string): string {
-    return format === 'Hexadecimal' ? this.transformHexadecimal(binaries.match(/.{8}/g) || []) : binaries;
+  /**
+   * @see PipeTransform#transform
+   *
+   * @param binaries Cadena con el binario
+   * @param system Tipo de sistema [Binario, Hexadecimal]
+   *
+   * @returns La cadena modificada
+   */
+  transform(binaries: string | undefined, system: string): string {
+    return (binaries === undefined ) ? '' : (system === 'Hexadecimal' ? this.transformHexadecimal(binaries.match(/.{8}/g) || []) : binaries);
   }
 
+  /**
+   * Toma un listado de binarios y lo convierte a hexadecimal
+   *
+   * @param binaries Cadena del binario
+   *
+   * @returns Una cadena con estructura hexadecimal
+   */
   private transformHexadecimal(binaries: string[]): string {
     let result: string = '';
 

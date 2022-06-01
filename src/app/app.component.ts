@@ -11,10 +11,19 @@ import { FragmentService } from './services/fragment.service';
 })
 export class AppComponent {
 
+  /**
+   * Formulario
+   */
   public form: FormGroup;
 
+  /**
+   * Fragmentos construidos para presentar
+   */
   public fragments: any[];
 
+  /**
+   * Listado de protocolos permitidos
+   */
   public protocols: string[];
 
   /**
@@ -49,7 +58,7 @@ export class AppComponent {
   }
 
   /**
-   * Llama a la ejecución del servicio
+   * Toma los valores del formulario y envía al servicio encargado de generar los fragmentos
    */
   public onSubmit(): void {
     const { mtu, datagramLength, protocol, addresses } = this.form.value;
