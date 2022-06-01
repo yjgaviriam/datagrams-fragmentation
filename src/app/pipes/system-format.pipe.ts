@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { UtilitiesService } from '../services/utilities.service';
 
 @Pipe({
-  name: 'systemsystem'
+  name: 'systemFormat'
 })
-export class SystemsystemPipe implements PipeTransform {
+export class SystemFormatPipe implements PipeTransform {
 
   constructor(private utilitiesService: UtilitiesService) { }
 
